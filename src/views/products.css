@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* To hide the Scroll bar from the page */
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+.containers{
+    margin: 24px;
+}
+
+img{
+    width: 80px;
+}
+
+#signin{
+    position: absolute;
+    top: 3px;
+    right: 0;
+    padding: 10px;
+    background-color: green;
+    color: #fff;
+    border-radius: 7%;
+}
+ 
