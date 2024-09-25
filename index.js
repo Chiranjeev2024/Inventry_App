@@ -6,6 +6,10 @@ import path from 'path';
 
 const server = express();
 
+// parse  Form data
+
+server.use(express.urlencoded({extended: true}));
+
 // SetUp view Engine settings
 
 server.set("view engine", "ejs");
@@ -17,6 +21,7 @@ const productController = new ProductController();
 
 server.get('/', productController.getProducts);
 server.get('/new',productController.getAddForm);
+server.post('/',productController.addNewProduct); 
 
 server.use(express.static('src/views'));
 
