@@ -2,6 +2,7 @@ import express from 'express';
 import ProductController from './src/controllers/product.controller.js';
 import ejsLayouts from "express-ejs-layouts";
 import path from 'path';
+import validateRequest from './src/middleware/validation.middleware.js';
 
 
 const server = express();
@@ -20,10 +21,13 @@ server.use(ejsLayouts);
 const productController = new ProductController();
 
 server.get('/', productController.getProducts);
-server.get('/new',productController.getAddForm);
-server.post('/',productController.addNewProduct); 
+server.get('/add-product',productController.getAddForm);
+server.post('/', validateRequest, productController.postAddProduct); 
+server.get('/update-product/:id', productController.getUpdateProductView);
+server.post('/update-product',productController.postUpdateProduct);
+
 
 server.use(express.static('src/views'));
 
 
-server.listen(3500);
+server.listen(3400);
