@@ -1,19 +1,29 @@
 export default class ProductModel {
-  constructor(_id, _name, _desc, _price, _imageUrl) {
-    this.id = _id;
-    this.name = _name;
-    this.desc = _desc;
-    this.price = _price;
-    this.imageUrl = _imageUrl;
+  constructor(id, name, desc, price, imageUrl) {
+    this.id = id;
+    this.name = name;
+    this.desc = desc;
+    this.price = price;
+    this.imageUrl = imageUrl;
   }
 
-  static get() {
+  static getAll() {
     return products;
   }
 
-  static update(productObj){
-    const index = products.findIndex((p)=> p.id == productObj.id);
+  static update(productObj) {
+    const index = products.findIndex(
+      (p) => p.id == productObj.id
+    );
     products[index] = productObj;
+  }
+
+  static delete(id){
+    const index = products.findIndex(
+      (p) => p.id == id
+    );
+    products.splice(index,1);
+
   }
 
   static add(productObj) {
@@ -27,7 +37,7 @@ export default class ProductModel {
     products.push(newProduct);
   }
 
-  static getById(id){
+  static getById(id) {
     return products.find((p) => p.id == id);
   }
 }
@@ -35,86 +45,23 @@ export default class ProductModel {
 var products = [
   new ProductModel(
     1,
-    "Product 1",
-    "Description for product 1",
+    'Product 1',
+    'Description for Product 10',
     19.99,
-    "../images/book1.webp"
+    'https://m.media-amazon.com/images/I/51-nXsSRfZL._SX328_BO1,204,203,200_.jpg'
   ),
   new ProductModel(
     2,
-    "Product 2",
-    "Description for product 3",
-    2999,
-    "./images/book2.webp"
+    'Product 2',
+    'Description for Product 2',
+    29.99,
+    'https://m.media-amazon.com/images/I/51xwGSNX-EL._SX356_BO1,204,203,200_.jpg'
   ),
   new ProductModel(
     3,
-    "Product 3",
-    "Description for product 3",
-    579.0,
-    "./images/book3.webp"
-  ),
-  new ProductModel(
-    4,
-    "Product 4",
-    "Description for product 4",
-    209.99,
-    "./images/book4.webp"
-  ),
-  new ProductModel(
-    5,
-    "Product 5",
-    "Description for product 5",
-    19.99,
-    "../images/book5.webp"
-  ),
-  new ProductModel(
-    6,
-    "Product 6",
-    "Description for product 6",
-    2999,
-    "./images/book6.webp"
-  ),
-  new ProductModel(
-    7,
-    "Product 7",
-    "Description for product 7",
-    579.0,
-    "./images/book7.webp"
-  ),
-  new ProductModel(
-    8,
-    "Product 8",
-    "Description for product 8",
-    209.99,
-    "./images/book8.webp"
-  ),
-  new ProductModel(
-    9,
-    "Product 9",
-    "Description for product 9",
-    19.99,
-    "../images/book9.webp"
-  ),
-  new ProductModel(
-    10,
-    "Product 10",
-    "Description for product 10",
-    2999,
-    "./images/book10.webp"
-  ),
-  new ProductModel(
-    11,
-    "Product 11",
-    "Description for product 11",
-    579.0,
-    "./images/book11.webp"
-  ),
-  new ProductModel(
-    12,
-    "Product 12",
-    "Description for product 12",
-    209.99,
-    "./images/book12.webp"
+    'Product 3',
+    'Description for Product 3',
+    39.99,
+    'https://m.media-amazon.com/images/I/31PBdo581fL._SX317_BO1,204,203,200_.jpg'
   ),
 ];

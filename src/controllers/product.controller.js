@@ -1,38 +1,56 @@
-import path, { resolve } from 'path';
 import ProductModel from '../models/product.model.js';
 
-export default class ProductController {
-    getProducts(req, res) {
-        let products = ProductModel.get();
-        res.render("products", {products:products})
-    }
+class ProductsController {
+  getProducts(req, res, next) {
+    var products = ProductModel.getAll();
+    res.render('index', { products });
+  }
 
-    getAddForm(req,res){
-        return res.render('new-product', {errorMessage:null});
-    }
+  getAddProduct(req, res, next) {
+    res.render('new-product', {
+      errorMessage: null,
+    });
+  }
 
-    postAddProduct(req,res){
-        ProductModel.add(req.body)
-        let products = ProductModel.get();
-        return res.render('products', {products:products});
-    }
+  postAddProduct(req, res, next) {
+    ProductModel.add(req.body);
+    var products = ProductModel.getAll();
+    res.render('index', { products });
+  }
 
-    getUpdateProductView(req,res,next){
-        // 1. if product exists then return view.
-        const id = req.params.id;
-        const productFound = ProductModel.getById(id);
-        if (productFound) {
-            res.render('update-product',{product:productFound, errorMessage:null});
-        }
-        // 2. else return errors.
-        else{
-            res.status(401).send('Product not found')
-        }
+  getUpdateProductView(req, res, next) {
+    // 1. if product exists then return view
+    const id = req.params.id;
+    const productFound = ProductModel.getById(id);
+    if (productFound) {
+      res.render('update-product', {
+        product: productFound,
+        errorMessage: null,
+      });
     }
+    // 2. else return errors.
+    else {
+      res.status(401).send('Product not found');
+    }
+  }
 
-    postUpdateProduct(req,res){
-        ProductModel.update(req.body)
-        var products = ProductModel.get();
-        return res.render('products', {products:products});
+  postUpdateProduct(req, res) {
+    ProductModel.update(req.body);
+    var products = ProductModel.getAll();
+    res.render('index', { products });
+  }
+
+deleteProduct(req, res){
+  const id = req.params.id;
+  const productFound = ProductModel.getById(id);
+    if (!productFound){
+      return res.status(401).send('Product not found');
     }
+  ProductModel.delete(id);
+  var products = ProductModel.getAll();
+  res.render('index', { products });
 }
+
+}
+
+export default ProductsController;
