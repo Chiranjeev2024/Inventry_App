@@ -25,6 +25,6 @@ app.post("/delete-product/:id", productsController.deleteProduct);
 app.post("/", validationMiddleware, productsController.postAddProduct);
 app.post("/update-product", productsController.postUpdateProduct);
 
-app.listen(3100, () => {
+app.listen(3200, () => {
   console.log("Server is running on port 3000");
 });
