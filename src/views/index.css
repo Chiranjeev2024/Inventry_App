@@ -1,4 +1,6 @@
-
+body{
+    background-color: aqua;
+}
 .container{
     margin: 24px;
 }
