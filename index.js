@@ -7,6 +7,8 @@ import validationMiddleware from "./src/middleware/validation.middleware.js";
 import { uploadFile } from "./src/middleware/file-upload.middleware.js";
 import session from "express-session";
 import { auth } from "./src/middleware/auth.middleware.js";
+import cookieParser from "cookie-parser";
+import { setLastVisit } from "./src/middleware/lastVisit.middleware.js";
 
 const app = express();
 
@@ -14,6 +16,9 @@ const productsController = new ProductsController();
 const userController = new UserController();
 
 app.use(express.static("public"));
+app.use(cookieParser());
+// app.use(setLastVisit);
+
 app.use(
   session({
     secret: "SecretKey",
@@ -34,7 +39,7 @@ app.get("/login", userController.getLogin);
 app.post("/login", userController.postLogin);
 app.get('/logout',userController.logout);
 app.post("/register", userController.postRegister);
-app.get("/", auth, productsController.getProducts);
+app.get("/", setLastVisit, auth, productsController.getProducts);
 app.get("/add-product", auth, productsController.getAddProduct);
 app.get("/update-product/:id", auth, productsController.getUpdateProductView);
 app.post("/delete-product/:id", auth, productsController.deleteProduct);
